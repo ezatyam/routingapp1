@@ -1,0 +1,50 @@
+﻿<br />
+<table border="1">
+  <thead>
+    <tr>
+      <th>
+        FirstName
+      </th>
+      <th>
+        LastName
+      </th>
+      <th>
+        Gender
+      </th>
+      <th>
+        Phone
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+        SecurityQuestion
+      </th>
+      <th>
+        Answer
+      </th>
+      <th>
+        Password
+      </th>
+    </tr>
+
+  </thead>
+  <tr *ngFor="let Employee of employees;">
+    <td>{{Employee.FirstName}}</td>
+    <td>{{Employee.LastName}}</td>
+    <td>{{Employee.Gender}}</td>
+    <td>{{Employee.Email}}</td>
+    <td>{{Employee.Phone}}</td>
+
+    <td>{{Employee.Password}}</td>
+    <td>{{Employee.SecurityQuestion}}</td>
+    <td>{{Employee.Answer}}</td>
+  </tr>
+  <!--<tr *ngIf="!employees || employees.length==0">
+    <td>
+      No data to display!
+    </td>
+  </tr>-->
+</table>
+
+
