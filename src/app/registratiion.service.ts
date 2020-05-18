@@ -11,7 +11,7 @@ import { Employee } from './registrations/Employee.Model';
 export class RegistratiionService {
     registration: FormGroup;
     constructor(private _http: Http, private fb: FormBuilder) { }
-
+    rooturl ="http://localhost:57387/api/Registers/"
     ngOnInit() {
         //this.registration = new FormGroup({
         //  FirstName: new FormControl(),
@@ -26,7 +26,7 @@ export class RegistratiionService {
        
     }
     getRegistration(): Observable<IEmployee[]> {
-        return this._http.get("http://localhost:57387/api/Registers")
+        return this._http.get(this.rooturl)
             .map((response: Response) => <IEmployee[]>response.json());
         //[
         //  { FirstName: "Test first name 1", LastName: "Test FirstName name", Gender: "Male", Phone: "1111111e", Email: "Email", SecurityQuestion: "What is your Birthdate?", Answer: "Test Answer", Password: "Password", }
@@ -47,12 +47,37 @@ export class RegistratiionService {
             Answer: [emp.Answer],
             Password: [emp.Password]
         })
-        this._http.post("http://localhost:57387/api/Registers", this.registration.value)
+        this._http.post(this.rooturl, this.registration.value)
             .subscribe();
-        
-
-        //console.log(fb.Answer)
-            //.map((response: Response) => <IEmployee[]>response.json());
+    }
+    putRegistration(emp: Employee, id: string): void {
+        this.registration = this.fb.group({
+            id: [emp.Id],
+            FirstName: [emp.FirstName],
+            LastName: [emp.LastName],
+            Gender: [emp.Gender],
+            Phone: [emp.Phone],
+            Email: [emp.Email],
+            SecurityQuestion: [emp.SecurityQuestion],
+            Answer: [emp.Answer],
+            Password: [emp.Password]
+        })
+        this._http.put(this.rooturl+id, this.registration.value)
+            .subscribe();
+        //console.log(this.registration.value,[id])
+    }
+    GetRegistrationbyId(id: string): Observable<Employee> {
+        return this._http.get(this.rooturl + id)
+            .map((response: Response) => <Employee>response.json());
+        //[
+        //  { FirstName: "Test first name 1", LastName: "Test FirstName name", Gender: "Male", Phone: "1111111e", Email: "Email", SecurityQuestion: "What is your Birthdate?", Answer: "Test Answer", Password: "Password", }
+        //  , { FirstName: "Test first name 2", LastName: "Test FirstName name", Gender: "Male", Phone: "1111111e", Email: "Email", SecurityQuestion: "What is your Birthdate?", Answer: "Test Answer", Password: "Password", }
+        //  , { FirstName: "Test first name 3", LastName: "Test FirstName name", Gender: "Male", Phone: "1111111e", Email: "Email", SecurityQuestion: "What is your Birthdate?", Answer: "Test Answer", Password: "Password", }
+        //]
+    }
+    deleteRegistrationbyId(id: string): void {
+        //console.log([id])
+       this._http.delete(this.rooturl+id).subscribe()
         //[
         //  { FirstName: "Test first name 1", LastName: "Test FirstName name", Gender: "Male", Phone: "1111111e", Email: "Email", SecurityQuestion: "What is your Birthdate?", Answer: "Test Answer", Password: "Password", }
         //  , { FirstName: "Test first name 2", LastName: "Test FirstName name", Gender: "Male", Phone: "1111111e", Email: "Email", SecurityQuestion: "What is your Birthdate?", Answer: "Test Answer", Password: "Password", }

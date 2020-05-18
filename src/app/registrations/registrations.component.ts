@@ -22,6 +22,7 @@ export class RegistrationsComponent implements OnInit {
     //}
 
     employee: Employee = {
+        id:null,
         FirstName: null,
         LastName: null,
         Gender: null,
