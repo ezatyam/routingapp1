@@ -9,52 +9,132 @@
       <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
       <h3>Welcome</h3>
       <p>You are 30 seconds away from earning your own money!</p>
-      <input type="submit" name="" value="Login" /><br />
+      <input type="button" (click)="Self('empview')" name="" value="Self" /><br />
     </div>
     <div class="col-md-9 register-right">
-      <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+      <!--<ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Employee</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Hirer</a>
         </li>
-      </ul>
+      </ul>-->
       <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
           <h3 class="register-heading">Employee Profile</h3>
-          <form (ngSubmit)="onsubmit(employee)">
+          <form  (ngSubmit)="onsubmit(employee)" #f="ngForm">
             <div class="row register-form">
               <div class="col-md-6">
-                <div class="form-group">
-                  <input type="hidden" class="form-control" [(ngModel)]="employee.id" #idModel="ngModel" name="txtId" value="{{employee.id}}" />
-                  <input type="text" class="form-control" [(ngModel)]="employee.FirstName" #FirstNameModel="ngModel" name="txtFirstName" placeholder="First Name *" value="{{employee.FirstName}}" />
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" [(ngModel)]="employee.LastName" #LastNameModel="ngModel" placeholder="Last Name *" name="txtLastName" value="" />
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control" [(ngModel)]="employee.Password" #PasswordNameModel="ngModel" placeholder="Password *" name="txtPassword" value="" />
-                </div>
-                <div class="form-group">
-                  <input type="password" class="form-control" name="txtConfirmPassword" placeholder="Confirm Password *" value="" />
-                </div>
-                <div class="form-group">
-                  <select class="form-control" [(ngModel)]="employee.Gender" name="ddGender" #GenderModel="ngModel">
+                <input id="name" name="name" class="form-control"
+                       required minlength="4" appForbiddenName="bob"
+                       [(ngModel)]="employee.FirstName" #name="ngModel" placeholder="First Name*">
 
+                <div *ngIf="name.invalid && (name.dirty || name.touched)"
+                     class="alert alert-danger">
 
-                    <option selected>Select</option>
-                    <option>Male</option>
-                    <option>Female</option>
+                  <p *ngIf="name.errors.required">
+                    Name is required.
+                  </p>
+                  <div *ngIf="name.errors.minlength">
+                    Name must be at least 4 characters long.
+                  </div>
+                  <div *ngIf="name.errors.forbiddenName">
+                    Name cannot be Bob.
+                  </div>
+
+                </div>
+                <div class="form-group" >
+                  <input type="hidden" class="form-control" [(ngModel)]="employee.Id" #idModel="ngModel" name="txtId" value="{{employee.Id}}" />
+                  
+                </div>
+                <div class="form-group" >
+                  <input type="text" class="form-control" [(ngModel)]="employee.LastName" #LastNameModel="ngModel" placeholder="Last Name *" name="txtLastName" value="" 
+                          required minlength="4" appForbiddenName="bob">
+                <div *ngIf="LastNameModel.invalid && (LastNameModel.dirty || LastNameModel.touched)"
+                     class="alert alert-danger">
+
+                  <p *ngIf="LastNameModel.errors.required">
+                    Last Name is required.
+                  </p>
+                  <div *ngIf="LastNameModel.errors.minlength">
+                    Last Name must be at least 4 characters long.
+                  </div>
+                  <div *ngIf="LastNameModel.errors.forbiddenName">
+                    Last Name cannot be Bob.
+                  </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" [(ngModel)]="employee.Password" #PasswordNameModel="ngModel" placeholder="Password *" name="txtPassword" value=""
+                         required minlength="4" appForbiddenName="bob">
+                <div *ngIf="PasswordNameModel.invalid && (PasswordNameModel.touched)"
+                     class="alert alert-danger">
+                  <p *ngIf="PasswordNameModel.errors.required">
+                    Password is required.
+                  </p>
+                  <div *ngIf="PasswordNameModel.errors.minlength">
+                    Password must be at least 4 characters long.
+                  </div>
+                 
+                  </div>
+               
+                </div>
+                
+                <div class="form-group">
+                  <select class="form-control" [(ngModel)]="employee.Gender" name="ddGender" #GenderModel="ngModel"
+                  required >
+                    <option>Select</option>
+                    <option >Male</option>
+                    <option >Female</option>
                   </select>
+                  <div *ngIf="GenderModel.invalid && (GenderModel.touched)"
+                       class="alert alert-danger">
+
+                    <p *ngIf="GenderModel.errors.required">
+                      Gender is required.
+                    </p>
+                   
+                    
+                  </div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
-                  <input type="email" class="form-control" [(ngModel)]="employee.Email" name="txtEmail" #EmailModel="ngModel" placeholder="Your Email *" value="" />
+                  <input type="email" class="form-control" [(ngModel)]="employee.Email" name="txtEmail" #EmailModel="ngModel" placeholder="Your Email *" value="" 
+                              required minlength="11" appForbiddenName="bob">
+                <div *ngIf="EmailModel.invalid && (EmailModel.dirty || EmailModel.touched)"
+                     class="alert alert-danger">
+                  <p *ngIf="EmailModel.errors.required">
+                    Email is required.
+                  </p>
+                  <div *ngIf="EmailModel.errors.minlength">
+                    Email must be at least 11 characters long.
+                  </div>
+                  <div *ngIf="EmailModel.errors.forbiddenName">
+                    Email cannot be Bob.
+                  </div>
+                  <div *ngIf="EmailModel.errors.Email">
+                    Invalid email.
+                  </div>
+                  </div>
                 </div>
                 <div class="form-group">
-                  <input type="text" minlength="10" maxlength="10" [(ngModel)]="employee.Phone" name="txtPhone" #PhoneModel="ngModel" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" />
+                  <input type="text" minlength="10" maxlength="10" [(ngModel)]="employee.Phone" name="txtPhone" #PhoneModel="ngModel" name="txtEmpPhone" class="form-control" placeholder="Your Phone *" value="" 
+                               required  appForbiddenName="bob">
+                <div *ngIf="PhoneModel.invalid && (PhoneModel.dirty || PhoneModel.touched)"
+                     class="alert alert-danger">
+                  <p *ngIf="PhoneModel.errors.required">
+                    Phone is required.
+                  </p>
+                  <div *ngIf="PhoneModel.errors.minlength">
+                    Phone must be at least 11 characters long.
+                  </div>
+                  <div *ngIf="PhoneModel.errors.forbiddenName">
+                    Phone cannot be Bob.
+                  </div>
+                  
+                  </div>
                 </div>
                 <div class="form-group">
                   <select class="form-control" [(ngModel)]="employee.SecurityQuestion" #SecurityQuestionModel="ngModel" name="txtSecurityQuestion">
@@ -63,60 +143,41 @@
                     <option value="3">What is Your old Phone Number</option>
                     <option value="4">What is your Pet Name?</option>
                   </select>
+                  <div *ngIf="SecurityQuestionModel.invalid && (SecurityQuestionModel.touched)"
+                       class="alert alert-danger">
+
+                    <p *ngIf="SecurityQuestionModel.errors.required">
+                      Security Question is required.
+                    </p>
+
+
+                  </div>
                 </div>
                 <div class="form-group">
-                  <input type="text" class="form-control" [(ngModel)]="employee.Answer" #AnwerModel="ngModel" name="txtAnswer" placeholder="Enter Your Answer *" value="" />
+                  <input type="text" class="form-control" [(ngModel)]="employee.Answer" #AnwerModel="ngModel" name="txtAnswer" placeholder="Enter Your Answer *" value="" 
+                                        required minlength="4" appForbiddenName="bob">
+                <div *ngIf="AnwerModel.invalid && (AnwerModel.dirty || AnwerModel.touched)"
+                     class="alert alert-danger">
+                  <p *ngIf="AnwerModel.errors.required">
+                    Email is required.
+                  </p>
+                  <div *ngIf="AnwerModel.errors.minlength">
+                    Email must be at least 4 characters long.
+                  </div>
+                  <div *ngIf="AnwerModel.errors.forbiddenName">
+                    Email cannot be Bob.
+                  </div>
+                 
+                  </div>
                 </div>
-                <input type="submit" class="btnRegister" value="Save" />
-                <input type="button"  class="btnRegister" routerLink="../employeelist" value="Back" />
+                <input type="submit"   class="btnRegister" value="Save" [disabled]="!f.valid" />
+                <input type="button"  class="btnRegister" routerLink="../employeelist" value="Goto Emp. List" />
 
               </div>
             </div>
           </form>
         </div>
-        <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-          <h3 class="register-heading">Apply as a Hirer</h3>
-          <div class="row register-form">
-            <div class="col-md-6">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="First Name *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Last Name *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" placeholder="Email *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="text" maxlength="10" minlength="10" class="form-control" placeholder="Phone *" value="" />
-              </div>
-
-
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password *" value="" />
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Confirm Password *" value="" />
-              </div>
-              <div class="form-group">
-                <select class="form-control">
-                  <option class="hidden" selected disabled>Please select your Sequrity Question</option>
-                  <option>What is your Birthdate?</option>
-                  <option>What is Your old Phone Number</option>
-                  <option>What is your Pet Name?</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="`Answer *" value="" />
-              </div>
-              <input type="submit" class="btnRegister" value="Register" />
-
-
-            </div>
-          </div>
-        </div>
+        
       </div>
     </div>
   </div>

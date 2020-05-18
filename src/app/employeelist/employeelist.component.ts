@@ -18,6 +18,7 @@ export class EmployeelistComponent implements OnInit {
     }
 
     ngOnInit() {
+        localStorage.clear()
         this.loaddata();
     }
     getTotalEmployeeCount(): number {
@@ -28,18 +29,23 @@ export class EmployeelistComponent implements OnInit {
     editdata(id: string) {
         localStorage.setItem('id', id)
         //console.log([id])
+        localStorage.setItem('viewtype', 'adminview')
         this._router.navigate(['../employee'])
     }
     deletedata(id: string) {
         //const empid = localStorage.getItem('id');
-        
-        
-        this._employeeService.deleteRegistrationbyId(id)
-        this.loaddata();
-        
-        
+        if (confirm('Are u sure to delete record')) {
+            this._employeeService.deleteRegistrationbyId(id)
+            this.loaddata();
+            location.reload()
+        }
+      
     }
-
+    addnew(type): void {
+        localStorage.setItem('viewtype', type)
+        //console.log([id])
+        this._router.navigate(['employee'])
+    }
     loaddata(): void {
         this._employeeService.getRegistration()
             .subscribe((employeedata) => this.employees = employeedata)

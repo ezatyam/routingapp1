@@ -10,7 +10,9 @@ import { TestComponent } from './test/test.component';
 import { RegistrationsComponent } from './registrations/registrations.component';
 import { EmployeelistComponent } from './employeelist/employeelist.component'
 import { Http, Response, HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';;
+import { LoginComponent } from './login/login.component'
+import { ConfirmEqualValidatorDirective } from './shared/Confirm.equal.validator.directive'
 
 
 
@@ -20,6 +22,7 @@ const routes: Routes = [
     { path: "registrations", component: RegistrationsComponent },
     { path: "test", component: TestComponent },
     { path: "employeelist", component: EmployeelistComponent },
+    { path: "userlogin", component: LoginComponent },
 ];
 
 @NgModule({
@@ -29,7 +32,8 @@ const routes: Routes = [
     ListComponent,
     TestComponent,
     RegistrationsComponent,
-    EmployeelistComponent
+    EmployeelistComponent,
+    LoginComponent
   ],
   imports: [
       BrowserModule,

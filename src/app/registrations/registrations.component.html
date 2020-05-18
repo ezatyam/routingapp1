@@ -35,9 +35,16 @@
                 <div class="form-group">
                   <input type="password" class="form-control" [(ngModel)]="employee.Password"  #PasswordNameModel="ngModel" placeholder="Password *" name="txtPassword" value="" />
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                   <input type="password" class="form-control" name="txtConfirmPassword" placeholder="Confirm Password *" value="" />
+                </div>-->
+                <div class="form-group">
+                  <input type="password" id="confirm_password" [(ngModel)]="employee.CPassword" #confirm_password="ngModel" appConfirmEqualValidator="password" name="confirm_password" class="form-control" placeholder="Confirm Password *" value="" required />
+
                 </div>
+                <span class="form-group" *ngIf="confirm_password.touched && confirm_password.errors?.notEqual">
+                  Passwor not match
+                </span>
                 <div class="form-group">
                   <select class="form-control" [(ngModel)]="employee.Gender" name="ddGender" #GenderModel="ngModel">
 
@@ -94,26 +101,30 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                <input type="password" class="form-control" placeholder="Password *" value="" />
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password *" value="" />
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" placeholder="Confirm Password *" value="" />
+                <input type="password" id="confirm_password" [(ngModel)]="employee.Password" #confirm_password="ngModel" appConfirmEqualValidator="password" name="confirm_password" class="form-control" placeholder="Confirm Password *" value="" required />
+                
               </div>
-              <div class="form-group">
-                <select class="form-control">
-                  <option class="hidden" selected disabled>Please select your Sequrity Question</option>
-                  <option>What is your Birthdate?</option>
-                  <option>What is Your old Phone Number</option>
-                  <option>What is your Pet Name?</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="`Answer *" value="" />
-              </div>
-              <input type="submit" class="btnRegister" value="Register" />
+              <span class="form-group" *ngIf="confirm_password.touched && confirm_password.errors?.notEqual">
+                Passwor not match
+              </span>
+                <div class="form-group">
+                  <select class="form-control">
+                    <option class="hidden" selected disabled>Please select your Sequrity Question</option>
+                    <option>What is your Birthdate?</option>
+                    <option>What is Your old Phone Number</option>
+                    <option>What is your Pet Name?</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="`Answer *" value="" />
+                </div>
+                <input type="submit" class="btnRegister" value="Register" />
 
 
-            </div>
+              </div>
           </div>
         </div>
       </div>

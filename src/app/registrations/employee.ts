@@ -8,4 +8,5 @@
     SecurityQuestion: number;
     Answer: string;
     Password: string;
+    CPassword: string;
 }

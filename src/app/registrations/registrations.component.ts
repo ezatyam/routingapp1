@@ -4,6 +4,7 @@ import { Key } from 'protractor';
 import { RegistratiionService } from '../registratiion.service';
 import { IEmployee } from '../registrations/employee';
 import { Employee } from '../registrations/Employee.Model';
+
 @Component({
     selector: 'app-registrations',
     templateUrl: './registrations.component.html',
@@ -22,13 +23,14 @@ export class RegistrationsComponent implements OnInit {
     //}
 
     employee: Employee = {
-        id:null,
+        Id:null,
         FirstName: null,
         LastName: null,
         Gender: null,
         Email: null,
         Phone: null,
         Password: null,
+        CPassword: null,
         SecurityQuestion: null,
         Answer: null
     }

@@ -11,7 +11,7 @@ import { Employee } from './registrations/Employee.Model';
 export class RegistratiionService {
     registration: FormGroup;
     constructor(private _http: Http, private fb: FormBuilder) { }
-    rooturl ="http://localhost:57387/api/Registers/"
+    rooturl ="http://localhost:57388/api/Registers/"
     ngOnInit() {
         //this.registration = new FormGroup({
         //  FirstName: new FormControl(),
@@ -52,7 +52,7 @@ export class RegistratiionService {
     }
     putRegistration(emp: Employee, id: string): void {
         this.registration = this.fb.group({
-            id: [emp.Id],
+            Id: [emp.Id],
             FirstName: [emp.FirstName],
             LastName: [emp.LastName],
             Gender: [emp.Gender],
@@ -83,5 +83,10 @@ export class RegistratiionService {
         //  , { FirstName: "Test first name 2", LastName: "Test FirstName name", Gender: "Male", Phone: "1111111e", Email: "Email", SecurityQuestion: "What is your Birthdate?", Answer: "Test Answer", Password: "Password", }
         //  , { FirstName: "Test first name 3", LastName: "Test FirstName name", Gender: "Male", Phone: "1111111e", Email: "Email", SecurityQuestion: "What is your Birthdate?", Answer: "Test Answer", Password: "Password", }
         //]
+    }
+    CheckRegistration(userName: string, pass: string): Observable<Employee> {
+        return this._http.get(this.rooturl + userName + "/" + pass)
+            .map((response: Response) => <Employee>response.json());
+        
     }
 }

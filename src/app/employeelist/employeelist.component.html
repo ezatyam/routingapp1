@@ -20,10 +20,19 @@
 <div class="container">
   <div class="row">
 
-
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-6">
+          <h4>Employee List</h4>
+         
+        </div>
+        <div class="col-6">
+          <h4><button class="btn btn-primary btn-xs pull-right" value="Add New" (click)="addnew('new')">Add New</button></h4>
+        </div>
+        
+      </div>
     <div class="col-md-12">
-      <h4>Bootstrap Snipp for Datatable</h4>
-      <h1>{{users}}</h1>
+      
       <div class="table-responsive">
 
 
@@ -33,24 +42,26 @@
             <tr>
               <th><input type="checkbox" class="checkthis" /></th>
               <th>
-                FirstName
+                First Name
               </th>
               <th>
-                LastName
+                Last Name
               </th>
               <th>
-                userName
+                Gender
               </th>
               <th>
-                password
+                Phone
               </th>
               <th>
-                phoneNumber
+                Email
               </th>
               <th>
-                EmailId
+                Security Question
               </th>
-
+              <th>
+                Answer
+              </th>
               <th>
                 Edit
               </th>
@@ -72,8 +83,8 @@
               <td>{{Employee.Email}}</td>
               <td>{{Employee.SecurityQuestion}}</td>
               <td>{{Employee.Answer}}</td>
-              <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs"  (click)="editdata(Employee.Id)"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
-              <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" (click)="deletedata(Employee.Id)" ><span class="glyphicon glyphicon-trash"></span></button></p></td>
+              <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" value="{{Employee.Id}}" (click)="editdata(Employee.Id)"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+              <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" (click)="deletedata(Employee.Id)" data-title="Delete"><span class="glyphicon glyphicon-trash"></span></button></p></td>
             </tr>
 
             <tr></tr>
